@@ -1,7 +1,9 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        sortedWord = defaultdict(list)
+        res = collections.defaultdict(list)
         for word in strs:
-            sortedWord[str(sorted(word))].append(word)
-            
-        return list(sortedWord.values())
+            count = [0] * 26
+            for c in word:
+                count[ord(c) - ord('a')] += 1
+            res[tuple(count)].append(word)
+        return res.values()
